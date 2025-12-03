@@ -61,9 +61,15 @@ switch ($controller) {
 }
 
 // Ejecutar acción
-if (method_exists($controllerObj, $action)) {
-    $controllerObj->$action();
+$action_safe = preg_replace('/[^a-zA-Z0-9_]/', '', $action);
+
+if (method_exists($controllerObj, $action_safe)) {
+    $controllerObj->$action_safe();
 } else {
-    echo "Acción no encontrada.";
+    if (method_exists($controllerObj, 'index')) {
+        $controllerObj->index();
+    } else {
+        echo "Acción no encontrada.";
+    }
 }
 ?>
