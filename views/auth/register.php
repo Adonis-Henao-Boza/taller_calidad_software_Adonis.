@@ -13,9 +13,14 @@
             <p>Crear Nueva Cuenta en Abaddon</p>
         </div>
 
-        <?php if (isset($error)): ?>
-            <div class="alert alert-error">❌ <?php echo $error; ?></div>
-        <?php endif; ?>
+        <?php
+        function isSelected($role) {
+            if (!isset($_POST['rol'])) {
+            return ($role == 'cliente') ? 'selected' : '';
+            }
+            return (isset($_POST['rol']) && $_POST['rol'] == $role) ? 'selected' : '';
+            }
+        ?>
 
         <div class="form-container">
             <form method="POST" action="index.php?controller=auth&action=store">
@@ -55,7 +60,7 @@
                 <div class="form-group">
                     <label for="rol">Tipo de Usuario *</label>
                     <select id="rol" name="rol" class="form-control" required>
-                        <option value="cliente" <?php echo (isset($_POST['rol']) && $_POST['rol'] == 'cliente') ? 'selected' : 'selected'; ?>>
+                        <option value="cliente" <?php echo (!isset($_POST['rol']) || (isset($_POST['rol']) && $_POST['rol'] == 'cliente')) ? 'selected' : ''; ?>>
                             Cliente
                         </option>
                         <option value="administrador" <?php echo (isset($_POST['rol']) && $_POST['rol'] == 'administrador') ? 'selected' : ''; ?>>
