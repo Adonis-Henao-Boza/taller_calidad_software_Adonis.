@@ -60,9 +60,7 @@ switch ($controller) {
         exit();
 }
 
-// Ejecutar acción
 $action_safe = preg_replace('/[^a-zA-Z0-9_]/', '', $action);
-
 if (method_exists($controllerObj, $action_safe)) {
     $controllerObj->$action_safe();
 } else {
