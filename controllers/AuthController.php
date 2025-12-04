@@ -14,7 +14,7 @@ class AuthController {
 
     // Mostrar formulario de login
     public function login() {
-        include 'views/auth/login.php';
+        include_once 'views/auth/login.php';
     }
 
     // Procesar login
@@ -41,7 +41,7 @@ class AuthController {
                 exit();
             } else {
                 $error = "Email o contraseña incorrectos.";
-                include 'views/auth/login.php';
+                include_once 'views/auth/login.php';
             }
         }
     }
@@ -62,16 +62,16 @@ class AuthController {
             // Verificar si el email ya existe
             if($this->usuario->emailExists()) {
                 $error = "Este email ya está registrado.";
-                include 'views/auth/register.php';
+                include_once 'views/auth/register.php';
                 return;
             }
 
             if($this->usuario->create()) {
                 $success = "Usuario registrado exitosamente. Puedes iniciar sesión.";
-                include 'views/auth/login.php';
+                include_once 'views/auth/login.php';
             } else {
                 $error = "Error al registrar usuario.";
-                include 'views/auth/register.php';
+                include_once 'views/auth/register.php';
             }
         }
     }
